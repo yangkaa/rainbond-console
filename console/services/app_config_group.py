@@ -3,7 +3,6 @@ from console.repositories.app_config_group import app_config_group_service_repo
 from console.repositories.app_config_group import app_config_group_item_repo
 from console.repositories.app import service_repo
 from django.db import transaction
-from console.exception.main import ServiceHandleException
 
 
 class AppConfigGroupService(object):
@@ -39,6 +38,7 @@ class AppConfigGroupService(object):
                 "service_alias": s.service_alias,
             })
         app_config_group_service_repo.create(**group_service_reqs)
+        return self.get_config_group(app_id, config_group_name)
 
     @transaction.atomic
     def update_config_group(self, app_id, config_group_name, config_items, deploy_status, service_ids):
@@ -118,9 +118,6 @@ class AppConfigGroupService(object):
 
     @transaction.atomic
     def delete_config_group(self, app_id, config_group_name):
-        acg = app_config_group_repo.get_config_group_by_id(app_id, config_group_name)
-        if not acg:
-            raise ServiceHandleException(msg="application config group is not found", msg_show="应用配置组不存在", status_code=404)
         app_config_group_repo.delete(app_id, config_group_name)
         app_config_group_item_repo.delete(app_id, config_group_name)
         app_config_group_service_repo.delete(app_id, config_group_name)

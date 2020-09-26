@@ -78,6 +78,10 @@ class AppConfigGroupEditOperationView(RegionTenantHeaderView, CloudEnterpriseCen
     def delete(self, request, *args, **kwargs):
         group_id = int(kwargs.get("group_id", None))
         config_group_name = request.GET.get("name", None)
+        acg = app_config_group_repo.get_config_group_by_id(group_id, config_group_name)
+        if not acg:
+            result = general_message(404, "not app config group", "没有该应用配置组，无法操作")
+            return Response(result)
         acg = app_config_group.delete_config_group(group_id, config_group_name)
         return Response(status=200, data=general_data(bean=acg.to_dict()))
 
