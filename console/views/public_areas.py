@@ -240,8 +240,8 @@ class GroupServiceView(RegionTenantHeaderView):
                 group_services = base_service.get_group_services_list(self.team.tenant_id, self.region_name, group_id, query)
                 if group_services:
                     for service in group_services:
-                        region_api_id = region_app_repo.get_region_app_id(self.region_name, group_id)
-                        update_body = {"service_name": service["service_name"], "app_id": region_api_id}
+                        region_app_id = region_app_repo.get_region_app_id(self.region_name, group_id)
+                        update_body = {"service_name": service["service_name"], "app_id": region_app_id}
                         region_api.update_service_app_id(self.region_name, self.tenant_name, service["service_alias"], update_body)
 
             group_service_list = service_repo.get_group_service_by_group_id(

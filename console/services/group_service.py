@@ -103,7 +103,6 @@ class GroupService(object):
         return 200, u"删除成功", group_id
 
     def add_service_to_group(self, tenant, region_name, group_id, service_id):
-
         if group_id:
             group_id = int(group_id)
             if group_id > 0:
@@ -111,6 +110,10 @@ class GroupService(object):
                 if not group:
                     return 404, u"应用不存在"
                 group_service_relation_repo.add_service_group_relation(group_id, service_id, tenant.tenant_id, region_name)
+                service = service_repo.get_service_by_service_id(service_id)
+                region_app_id = region_app_repo.get_region_app_id(region_name, group_id)
+                update_body = {"service_name": service.service_name, "app_id": region_app_id}
+                region_api.update_service_app_id(region_name, tenant.tenant_name, service.service_alias, update_body)
         return 200, u"success"
 
     def get_app_detail(self, tenant, region_name, app_id):
