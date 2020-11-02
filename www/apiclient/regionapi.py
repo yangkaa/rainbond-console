@@ -63,7 +63,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/resources?enterprise_id=" + enterprise_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/resources?enterprise_id=" + enterprise_id
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, timeout=10)
@@ -98,7 +98,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region)
@@ -111,7 +111,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         # 更新tenant_id 为数据中心tenant_id
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services"
 
         self._set_headers(token)
         logger.debug('------------region_body------------->{0}'.format(json.dumps(body)))
@@ -123,7 +123,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -134,7 +134,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region, body=json.dumps(body))
@@ -145,7 +145,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "?enterprise_id=" + enterprise_id
 
         self._set_headers(token)
@@ -159,7 +159,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/build"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/build"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body))
@@ -172,7 +172,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         # 更新tenant_id 为数据中心tenant_id
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/code-check"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/code-check"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body))
@@ -182,7 +182,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取组件语言"""
 
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/builder/codecheck/service/{0}".format(service_id)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/builder/codecheck/service/{0}".format(service_id)
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -195,7 +195,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         # 更新tenant_id 为数据中心tenant_id
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/dependency"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/dependency"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body))
@@ -208,7 +208,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         # 更新tenant_id 为数据中心tenant_id
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/dependency"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/dependency"
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region, body=json.dumps(body))
@@ -221,7 +221,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         # 更新tenant_id 为数据中心tenant_id
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/env"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/env"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body))
@@ -234,7 +234,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         # 更新tenant_id 为数据中心tenant_id
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/env"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/env"
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region, body=json.dumps(body))
@@ -244,7 +244,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/env"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/env"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region, body=json.dumps(body))
@@ -255,7 +255,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/horizontal"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/horizontal"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region, body=json.dumps(body))
@@ -266,7 +266,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/vertical"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/vertical"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region, body=json.dumps(body))
@@ -277,7 +277,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/language"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/language"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body))
@@ -287,7 +287,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取数据中心可用的标签"""
 
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/resources/labels"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/resources/labels"
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -298,7 +298,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/label"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/label"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -309,7 +309,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/label"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/label"
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, json.dumps(body), region=region)
@@ -320,7 +320,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/label"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/label"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, body, region=region)
@@ -331,7 +331,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/label"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/label"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, json.dumps(body), region=region)
@@ -342,7 +342,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "/pods?enterprise_id=" + enterprise_id
 
         self._set_headers(token)
@@ -352,7 +352,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_dynamic_services_pods(self, region, tenant_name, services_ids):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/pods?service_ids={}".format(",".join(services_ids))
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/pods?service_ids={}".format(",".join(services_ids))
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, timeout=15)
         return body
@@ -362,7 +362,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "/pods/" + pod_name + "/detail"
 
         self._set_headers(token)
@@ -377,7 +377,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         port_list = body["port"]
         for port in port_list:
             port["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -391,7 +391,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         port_list = body["port"]
         for port in port_list:
             port["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, json.dumps(body), region=region)
@@ -402,7 +402,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports/" + str(
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports/" + str(
             port) + "?enterprise_id=" + enterprise_id
 
         self._set_headers(token)
@@ -414,7 +414,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports/" + str(
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports/" + str(
             port) + "/inner"
 
         self._set_headers(token)
@@ -426,7 +426,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         try:
             url, token = self.__get_region_access_info(tenant_name, region)
             tenant_region = self.__get_tenant_region_info(tenant_name, region)
-            url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports/" + str(
+            url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/ports/" + str(
                 port) + "/outer"
 
             self._set_headers(token)
@@ -448,7 +448,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/probe"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/probe"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, json.dumps(body), region=region)
@@ -460,7 +460,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/probe"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/probe"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -471,7 +471,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/probe"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/probe"
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, json.dumps(body), region=region)
@@ -482,7 +482,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/restart"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/restart"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -493,7 +493,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/rollback"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/rollback"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -504,7 +504,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/start"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/start"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -515,7 +515,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/stop"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/stop"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -526,7 +526,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/upgrade"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/upgrade"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -537,7 +537,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "/status?enterprise_id=" + enterprise_id
 
         self._set_headers(token)
@@ -633,7 +633,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/volume"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/volume"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -644,7 +644,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/volume"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/volume"
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, json.dumps(body), region=region)
@@ -655,7 +655,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/volume-dependency"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/volume-dependency"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -666,7 +666,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/volume-dependency"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/volume-dependency"
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, json.dumps(body), region=region)
@@ -677,7 +677,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services_status"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services_status"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body), timeout=20)
@@ -687,7 +687,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         if test:
             self.get_enterprise_api_version_v2(enterprise_id, region=region)
         url, token = self.__get_region_access_info_by_enterprise_id(enterprise_id, region)
-        url = url + "/v2/enterprise/" + enterprise_id + "/running-services"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/enterprise/" + enterprise_id + "/running-services"
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, timeout=10)
         if res.get("status") == 200 and isinstance(body, dict):
@@ -699,7 +699,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/"\
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/"\
             + service_alias + "/log-instance?enterprise_id=" + enterprise_id
 
         self._set_headers(token)
@@ -710,7 +710,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取组件日志"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/{0}/services/{1}/logs?rows={2}".format(tenant_region.region_tenant_name, service_alias, rows)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/{0}/services/{1}/logs?rows={2}".format(tenant_region.region_tenant_name, service_alias, rows)
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
         return body
@@ -720,7 +720,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "/log-file?enterprise_id=" + enterprise_id
 
         self._set_headers(token)
@@ -732,7 +732,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/event-log"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/event-log"
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body), timeout=10)
         return res, body
@@ -740,7 +740,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_target_events_list(self, region, tenant_name, target, target_id, page, page_size):
         """获取作用对象事件日志列表"""
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/events" + "?target={0}&target-id={1}&page={2}&size={3}".format(target, target_id, page, page_size)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/events" + "?target={0}&target-id={1}&page={2}&size={3}".format(target, target_id, page, page_size)
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, timeout=20)
         return res, body
@@ -748,7 +748,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_events_log(self, tenant_name, region, event_id):
         """获取作用对象事件日志内容"""
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/events/" + event_id + "/log"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/events/" + event_id + "/log"
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
         return res, body
@@ -782,7 +782,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取opentsdb数据"""
 
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/opentsdb/query"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/opentsdb/query"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -820,7 +820,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/cloud-share"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/cloud-share"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body))
@@ -870,7 +870,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/domains"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/domains"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -880,7 +880,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/domains/" + \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/domains/" + \
             body["domain"]
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, json.dumps(body), region=region)
@@ -891,7 +891,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_name + "/http-rule"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_name + "/http-rule"
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
         return body
@@ -901,7 +901,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_name + "/http-rule"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_name + "/http-rule"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, json.dumps(body), region=region)
@@ -910,7 +910,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def delete_http_domain(self, region, tenant_name, body):
 
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_name + "/http-rule"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_name + "/http-rule"
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, json.dumps(body), region=region)
@@ -921,7 +921,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_name + "/tcp-rule"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_name + "/tcp-rule"
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
         return body
@@ -931,7 +931,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_name + "/tcp-rule"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_name + "/tcp-rule"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, json.dumps(body), region=region)
@@ -940,7 +940,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def unbindTcpDomain(self, region, tenant_name, body):
 
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_name + "/tcp-rule"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_name + "/tcp-rule"
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, json.dumps(body), region=region)
@@ -948,14 +948,14 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
     def get_port(self, region, tenant_name):
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/gateway/ports"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/gateway/ports"
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
         return res, body
 
     def get_ips(self, region, tenant_name):
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/gateway/ips"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/gateway/ips"
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
         return res, body
@@ -964,7 +964,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin"
 
         self._set_headers(token)
         return self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -973,7 +973,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin/" + plugin_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin/" + plugin_id
 
         self._set_headers(token)
         return self._delete(url, self.default_headers, None, region=region)
@@ -982,7 +982,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
 
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin"
 
         self._set_headers(token)
         return self._put(url, self.default_headers, json.dumps(body), region=region)
@@ -991,7 +991,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin/" \
             + plugin_id + "/setenv"
 
         self._set_headers(token)
@@ -1002,7 +1002,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
 
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "/plugin/" + plugin_id + "/upenv"
 
         self._set_headers(token)
@@ -1013,7 +1013,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/plugin"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/plugin"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -1023,7 +1023,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """创建数据中心端插件"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/{0}/plugin/{1}/build".format(tenant_region.region_tenant_name, plugin_id)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/{0}/plugin/{1}/build".format(tenant_region.region_tenant_name, plugin_id)
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -1033,7 +1033,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取插件构建状态"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/{0}/plugin/{1}/build-version/{2}".format(tenant_region.region_tenant_name, plugin_id,
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/{0}/plugin/{1}/build-version/{2}".format(tenant_region.region_tenant_name, plugin_id,
                                                                           build_version)
 
         self._set_headers(token)
@@ -1045,7 +1045,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/{0}/event-log".format(tenant_region.region_tenant_name)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/{0}/event-log".format(tenant_region.region_tenant_name)
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(data), region=region)
         return body
@@ -1055,7 +1055,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
 
-        url = url + "/v2/tenants/{0}/plugin/{1}/build-version/{2}".format(tenant_region.region_tenant_name, plugin_id,
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/{0}/plugin/{1}/build-version/{2}".format(tenant_region.region_tenant_name, plugin_id,
                                                                           build_version)
 
         self._set_headers(token)
@@ -1066,7 +1066,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取监控数据"""
 
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/api/v1/query" + params
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/api/v1/query" + params
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, timeout=10, retries=1)
         return res, body
@@ -1075,7 +1075,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取团队下组件访问量排序"""
 
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/api/v1/query" + params
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/api/v1/query" + params
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, timeout=10, retries=1)
         return res, body
@@ -1084,7 +1084,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取团队下域名访问量排序"""
 
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/api/v1/query" + params
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/api/v1/query" + params
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, timeout=10, retries=1)
         return res, body
@@ -1092,7 +1092,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_query_range_data(self, region, tenant_name, params):
         """获取监控范围数据"""
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/api/v1/query_range" + params
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/api/v1/query_range" + params
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, timeout=10, retries=1)
         return res, body
@@ -1100,7 +1100,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_service_publish_status(self, region, tenant_name, service_key, app_version):
 
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/builder/publish/service/{0}/version/{1}".format(service_key, app_version)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/builder/publish/service/{0}/version/{1}".format(service_key, app_version)
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -1111,7 +1111,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/event"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/event"
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, body=json.dumps({"event_ids": event_ids}), timeout=10)
@@ -1161,7 +1161,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/protocols"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/protocols"
         logger.debug("multi protocol url is {}".format(url))
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -1187,7 +1187,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """组件源检测"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/servicecheck"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/servicecheck"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body))
@@ -1197,7 +1197,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """组件源检测信息获取"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/servicecheck/" + str(uuid)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/servicecheck/" + str(uuid)
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -1207,7 +1207,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """组件扩大资源申请接口"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + \
             "/chargesverify?quantity={0}&reason={1}&eid={2}".format(data["quantity"], data["reason"], data["eid"])
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region, body=json.dumps(data))
@@ -1233,7 +1233,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin"
 
         self._set_headers(token)
         return self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -1242,7 +1242,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin/" + plugin_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin/" + plugin_id
         self._set_headers(token)
         return self._delete(url, self.default_headers, None, region=region)
 
@@ -1250,7 +1250,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
 
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/plugin"
 
         self._set_headers(token)
         return self._put(url, self.default_headers, json.dumps(body), region=region)
@@ -1260,7 +1260,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
 
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "/plugin/" + plugin_id + "/upenv"
 
         self._set_headers(token)
@@ -1271,7 +1271,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         service_ids = ",".join(service_id_list)
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/pods?enterprise_id=" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/pods?enterprise_id=" \
             + enterprise_id + "&service_ids=" + service_ids
 
         self._set_headers(token)
@@ -1289,7 +1289,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_app_export_status(self, region, enterprise_id, event_id):
         """查询应用导出状态"""
         url, token = self.__get_region_access_info_by_enterprise_id(enterprise_id, region)
-        url = url + "/v2/app/export/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/export/" + event_id
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
         return res, body
@@ -1313,21 +1313,21 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_app_import_status(self, region, tenant_name, event_id):
         """查询导入状态"""
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/app/import/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/import/" + event_id
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
         return res, body
 
     def get_enterprise_app_import_status(self, region, eid, event_id):
         url, token = self.__get_region_access_info_by_enterprise_id(eid, region)
-        url = url + "/v2/app/import/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/import/" + event_id
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
         return res, body
 
     def get_enterprise_import_file_dir(self, region, eid, event_id):
         url, token = self.__get_region_access_info_by_enterprise_id(eid, region)
-        url = url + "/v2/app/import/ids/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/import/ids/" + event_id
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
         return res, body
@@ -1335,14 +1335,14 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_import_file_dir(self, region, tenant_name, event_id):
         """查询导入目录"""
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/app/import/ids/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/import/ids/" + event_id
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
         return res, body
 
     def delete_enterprise_import(self, region, eid, event_id):
         url, token = self.__get_region_access_info_by_enterprise_id(eid, region)
-        url = url + "/v2/app/import/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/import/" + event_id
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region)
         return res, body
@@ -1350,7 +1350,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def delete_import(self, region, tenant_name, event_id):
         """删除导入"""
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/app/import/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/import/" + event_id
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region)
         return res, body
@@ -1358,14 +1358,14 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def create_import_file_dir(self, region, tenant_name, event_id):
         """创建导入目录"""
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/app/import/ids/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/import/ids/" + event_id
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region)
         return res, body
 
     def delete_enterprise_import_file_dir(self, region, eid, event_id):
         url, token = self.__get_region_access_info_by_enterprise_id(eid, region)
-        url = url + "/v2/app/import/ids/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/import/ids/" + event_id
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region)
         return res, body
@@ -1373,7 +1373,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def delete_import_file_dir(self, region, tenant_name, event_id):
         """删除导入目录"""
         url, token = self.__get_region_access_info(tenant_name, region)
-        url = url + "/v2/app/import/ids/" + event_id
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/app/import/ids/" + event_id
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region)
         return res, body
@@ -1381,7 +1381,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def backup_group_apps(self, region, tenant_name, body):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body))
@@ -1390,7 +1390,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_backup_status_by_backup_id(self, region, tenant_name, backup_id):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups/" + str(backup_id)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups/" + str(backup_id)
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -1399,7 +1399,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def delete_backup_by_backup_id(self, region, tenant_name, backup_id):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups/" + str(backup_id)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups/" + str(backup_id)
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region)
@@ -1408,7 +1408,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_backup_status_by_group_id(self, region, tenant_name, group_uuid):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups?group_id=" + str(group_uuid)
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups?group_id=" + str(group_uuid)
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -1418,7 +1418,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """发起迁移命令"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups/" + backup_id + "/restore"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups/" + backup_id + "/restore"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(data))
@@ -1428,7 +1428,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取迁移结果"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backups/" \
             + backup_id + "/restore/" + restore_id
 
         self._set_headers(token)
@@ -1439,7 +1439,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """数据中心备份数据进行拷贝"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backupcopy"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/groupapp/backupcopy"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(data))
@@ -1450,7 +1450,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "/build-list"
 
         self._set_headers(token)
@@ -1462,7 +1462,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "/build-version/" + version_id
 
         self._set_headers(token)
@@ -1474,7 +1474,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" \
             + service_alias + "/build-version/" + version_id
 
         self._set_headers(token)
@@ -1485,7 +1485,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """查询指定组件的部署版本"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/deployversions"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/deployversions"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(data))
@@ -1495,7 +1495,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """查询指定组件的部署版本"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/deployversions"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/deployversions"
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -1514,7 +1514,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """第三方组件endpoint操作"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/endpoints"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/endpoints"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region, body=json.dumps(data))
@@ -1525,7 +1525,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """第三方组件endpoint操作"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/endpoints"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/endpoints"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(data))
@@ -1536,7 +1536,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """第三方组件endpoint操作"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/endpoints"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/endpoints"
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region, body=json.dumps(data))
@@ -1547,7 +1547,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         """获取第三方组件endpoint数据"""
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/endpoints"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/endpoints"
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -1558,7 +1558,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/3rd-party/probe"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/3rd-party/probe"
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -1568,7 +1568,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def put_third_party_service_health(self, region, tenant_name, service_alias, body):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/3rd-party/probe"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/3rd-party/probe"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region, body=json.dumps(body))
@@ -1578,7 +1578,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def batch_operation_service(self, region, tenant_name, body):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/batchoperation"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/batchoperation"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body))
@@ -1589,7 +1589,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
         body["tenant_id"] = tenant_region.region_tenant_id
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/rule-config"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/rule-config"
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, json.dumps(body), region=region)
         logger.debug('-------1111--body----->{0}'.format(body))
@@ -1600,7 +1600,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
 
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + uri
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + uri
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, json.dumps(body), region=region)
@@ -1609,10 +1609,10 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def list_scaling_records(self, region, tenant_name, service_alias, page=None, page_size=None):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/xparecords"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/xparecords"
 
         if page is not None and page_size is not None:
-            url = url + "?page={}&page_size={}".format(page, page_size)
+            url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "?page={}&page_size={}".format(page, page_size)
 
         self._set_headers(token)
         res, body = self._get(url, self.default_headers, region=region)
@@ -1621,7 +1621,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def create_xpa_rule(self, region, tenant_name, service_alias, data):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/xparules"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/xparules"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, body=json.dumps(data), region=region)
@@ -1630,7 +1630,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def update_xpa_rule(self, region, tenant_name, service_alias, data):
         url, token = self.__get_region_access_info(tenant_name, region)
         tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/xparules"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias + "/xparules"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, body=json.dumps(data), region=region)
@@ -1639,7 +1639,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def update_ingresses_by_certificate(self, region_name, tenant_name, body):
         url, token = self.__get_region_access_info(tenant_name, region_name)
         region = self.__get_tenant_region_info(tenant_name, region_name)
-        url = url + "/v2/tenants/" + region.region_tenant_name + "/gateway/certificate"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + region.region_tenant_name + "/gateway/certificate"
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, body=json.dumps(body), region=region_name)
         return res, body
@@ -1649,7 +1649,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
         if kwargs.get("test"):
             self.get_enterprise_api_version_v2(enterprise_id, region=region_name)
         url, token = self.__get_region_access_info_by_enterprise_id(enterprise_id, region_name)
-        url = url + "/v2/cluster"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/cluster"
         self._set_headers(token)
         kwargs["retries"] = 1
         kwargs["timeout"] = 3
@@ -1769,7 +1769,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def update_app_ports(self, region_name, tenant_name, app_id, data):
         url, token = self.__get_region_access_info(tenant_name, region_name)
         tenant_region = self.__get_tenant_region_info(tenant_name, region_name)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/ports"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/ports"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, body=json.dumps(data), region=region_name)
@@ -1778,7 +1778,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def get_app_status(self, region_name, tenant_name, region_app_id):
         url, token = self.__get_region_access_info(tenant_name, region_name)
         tenant_region = self.__get_tenant_region_info(tenant_name, region_name)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + region_app_id + "/status"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + region_app_id + "/status"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region_name)
@@ -1787,7 +1787,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def create_application(self, region_name, tenant_name, body):
         url, token = self.__get_region_access_info(tenant_name, region_name)
         tenant_region = self.__get_tenant_region_info(tenant_name, region_name)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region_name, body=json.dumps(body))
@@ -1796,7 +1796,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def update_service_app_id(self, region_name, tenant_name, service_alias, body):
         url, token = self.__get_region_access_info(tenant_name, region_name)
         tenant_region = self.__get_tenant_region_info(tenant_name, region_name)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/services/" + service_alias
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region_name, body=json.dumps(body))
@@ -1805,7 +1805,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def batch_update_service_app_id(self, region_name, tenant_name, app_id, body):
         url, token = self.__get_region_access_info(tenant_name, region_name)
         tenant_region = self.__get_tenant_region_info(tenant_name, region_name)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/services"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/services"
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region_name, body=json.dumps(body))
@@ -1814,7 +1814,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def create_app_config_group(self, region_name, tenant_name, app_id, body):
         url, token = self.__get_region_access_info(tenant_name, region_name)
         tenant_region = self.__get_tenant_region_info(tenant_name, region_name)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/configgroups"
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/configgroups"
 
         self._set_headers(token)
         res, body = self._post(url, self.default_headers, region=region_name, body=json.dumps(body))
@@ -1823,7 +1823,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def update_app_config_group(self, region_name, tenant_name, app_id, config_group_name, body):
         url, token = self.__get_region_access_info(tenant_name, region_name)
         tenant_region = self.__get_tenant_region_info(tenant_name, region_name)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/configgroups/" + config_group_name
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/configgroups/" + config_group_name
 
         self._set_headers(token)
         res, body = self._put(url, self.default_headers, region=region_name, body=json.dumps(body))
@@ -1832,7 +1832,7 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def delete_app_config_group(self, region_name, tenant_name, app_id, config_group_name):
         url, token = self.__get_region_access_info(tenant_name, region_name)
         tenant_region = self.__get_tenant_region_info(tenant_name, region_name)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/configgroups/" + config_group_name
+        url = "http://8888.gr7a1f0c.2c9v614j.a24839.grapps.cn" + "/v2/tenants/" + tenant_region.region_tenant_name + "/apps/" + app_id + "/configgroups/" + config_group_name
 
         self._set_headers(token)
         res, body = self._delete(url, self.default_headers, region=region_name)
