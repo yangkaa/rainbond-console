@@ -19,7 +19,7 @@ RUN chmod +x /app/ui/entrypoint.sh \
       && python -m pip install --upgrade pip \
       && pip config set global.index-url "$PIP_SOURCE_URL" \
       && pip config set install.trusted-host "$PIP_SOURCE_HOST" \
-      && pip install -r requirements.txt \
+      && pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ -r requirements.txt \
       && python manage.py collectstatic --noinput --ignore weavescope-src --ignore drf-yasg  --ignore rest_framework\
       && rm -rf /root/.cache \
       && rm -rf /tmp/* \
