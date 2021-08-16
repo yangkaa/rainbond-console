@@ -50,11 +50,9 @@ from www.apiclient.regionapi import RegionInvokeApi
 from www.models.main import (TenantEnterprise, TenantEnterpriseToken, TenantServiceEnvVar, TenantServiceInfo,
                              TenantServicesPort, Users)
 from www.models.plugin import ServicePluginConfigVar
-from www.tenantservice.baseservice import BaseTenantService
 from www.utils.crypt import make_uuid
 
 logger = logging.getLogger("default")
-baseService = BaseTenantService()
 app_relation_service = AppServiceRelationService()
 region_api = RegionInvokeApi()
 mnt_service = AppMntService()
@@ -849,7 +847,7 @@ class MarketAppService(object):
             tenant_service.min_memory = app.get("extend_method_map", {}).get("min_memory")
         else:
             tenant_service.min_memory = 512
-        tenant_service.min_cpu = baseService.calculate_service_cpu(region_name, tenant_service.min_memory)
+        tenant_service.min_cpu = 0
         tenant_service.version = app.get("version")
         if app.get("service_image", None) and app.get("service_image", {}).get("namespace"):
             tenant_service.namespace = app.get("service_image", {}).get("namespace")

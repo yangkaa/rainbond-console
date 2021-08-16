@@ -99,11 +99,6 @@ class BaseTenantService(object):
         max_port = reduce(lambda x, y: y if (y - x) == 1 else x, port_list)
         return max_port + 1
 
-    def calculate_service_cpu(self, region, min_memory):
-        # The algorithm is obsolete
-        min_cpu = int(min_memory) / 128 * 20
-        return int(min_cpu)
-
     def create_service(self,
                        service_id,
                        tenant_id,

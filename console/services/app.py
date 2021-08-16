@@ -45,8 +45,7 @@ from www.models.main import ServiceConsume, TenantServiceInfo
 from www.models.main import ThirdPartyServiceEndpoints
 from www.models.main import TenantServicesPort
 from www.models.main import ServiceGroup
-from www.tenantservice.baseservice import (BaseTenantService, CodeRepositoriesService, ServicePluginResource,
-                                           TenantUsedResource)
+from www.tenantservice.baseservice import (CodeRepositoriesService, ServicePluginResource, TenantUsedResource)
 from www.utils.crypt import make_uuid
 from www.utils.status_translate import get_status_info_map
 
@@ -54,7 +53,6 @@ tenantUsedResource = TenantUsedResource()
 logger = logging.getLogger("default")
 region_api = RegionInvokeApi()
 codeRepositoriesService = CodeRepositoriesService()
-baseService = BaseTenantService()
 servicePluginResource = ServicePluginResource()
 gitHubClient = GitHubApi()
 port_service = AppPortService()
@@ -85,7 +83,7 @@ class AppService(object):
         tenant_service.env = ""
         tenant_service.min_node = 1
         tenant_service.min_memory = 128
-        tenant_service.min_cpu = baseService.calculate_service_cpu(region, 128)
+        tenant_service.min_cpu = 0
         tenant_service.inner_port = 5000
         tenant_service.version = "81701"
         tenant_service.namespace = "goodrain"
@@ -203,7 +201,7 @@ class AppService(object):
         tenant_service.env = ","
         tenant_service.min_node = 1
         tenant_service.min_memory = 128
-        tenant_service.min_cpu = baseService.calculate_service_cpu(region, 128)
+        tenant_service.min_cpu = 0
         tenant_service.inner_port = 0
         tenant_service.version = "latest"
         tenant_service.namespace = "goodrain"
@@ -752,7 +750,7 @@ class AppService(object):
         if isinstance(min_cpu, str):
             min_cpu = int(min_cpu)
         if type(min_cpu) != int or min_cpu < 0:
-            min_cpu = baseService.calculate_service_cpu(service.service_region, min_memory)
+            min_cpu = 0
 
         extend_method = data.get("extend_method", service.extend_method)
 

@@ -50,14 +50,13 @@ from django.conf import settings
 from django.db import transaction
 from www.apiclient.regionapi import RegionInvokeApi
 from www.models.main import ServiceGroupRelation
-from www.tenantservice.baseservice import BaseTenantService, TenantUsedResource
+from www.tenantservice.baseservice import TenantUsedResource
 from www.utils.crypt import make_uuid
 
 tenantUsedResource = TenantUsedResource()
 event_service = AppEventService()
 region_api = RegionInvokeApi()
 logger = logging.getLogger("default")
-baseService = BaseTenantService()
 relation_service = AppServiceRelationService()
 env_var_service = AppEnvVarService()
 port_service = AppPortService()
@@ -773,7 +772,7 @@ class AppManageService(AppManageBase):
             body = dict()
             body["container_memory"] = new_memory
             if new_cpu is None or type(new_cpu) != int:
-                new_cpu = baseService.calculate_service_cpu(service.service_region, new_memory)
+                new_cpu = 0
             body["container_cpu"] = new_cpu
             if new_gpu is not None and type(new_gpu) == int:
                 body["container_gpu"] = new_gpu

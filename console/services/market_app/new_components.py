@@ -11,7 +11,6 @@ from console.services.app_config import port_service
 from console.services.app_config import volume_service
 from console.services.app_config import probe_service
 from console.services.app_config.promql_service import promql_service
-from www.tenantservice.baseservice import BaseTenantService
 # model
 from www.models.main import TenantServiceInfo
 from www.models.main import TenantServicesPort
@@ -35,7 +34,6 @@ from console.constants import AppConstants
 from www.utils.crypt import make_uuid
 
 logger = logging.getLogger("default")
-baseService = BaseTenantService()
 
 
 class NewComponents(object):
@@ -364,7 +362,7 @@ class NewComponents(object):
             version = version[:255]
         container_cpu = extend_info.get("container_cpu")
         if container_cpu is None:
-            container_cpu = baseService.calculate_service_cpu(component.service_region, component.min_memory)
+            container_cpu = 0
         return ServiceExtendMethod(
             service_key=component.service_key,
             app_version=version,

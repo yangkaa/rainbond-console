@@ -23,13 +23,11 @@ from console.services.group_service import group_service
 from console.utils.timeutil import current_time_str
 from www.apiclient.regionapi import RegionInvokeApi
 from www.models.main import TenantServiceInfo
-from www.tenantservice.baseservice import BaseTenantService
 from www.utils.crypt import make_uuid
 from console.enum.component_enum import ComponentType
 
 region_api = RegionInvokeApi()
 logger = logging.getLogger("default")
-baseService = BaseTenantService()
 app_check_service = AppCheckService()
 app_relation_service = AppServiceRelationService()
 
@@ -186,7 +184,7 @@ class ComposeService(object):
         tenant_service.env = ","
         tenant_service.min_node = 1
         tenant_service.min_memory = 128
-        tenant_service.min_cpu = baseService.calculate_service_cpu(region, 128)
+        tenant_service.min_cpu = 0
         tenant_service.inner_port = 0
         tenant_service.version = "latest"
         tenant_service.namespace = "goodrain"
