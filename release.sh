@@ -1,8 +1,8 @@
 #!/bin/bash
 IMAGE_DOMAIN=${BUILD_IMAGE_DOMAIN:-docker.io}
-IMAGE_NAMESPACE=${BUILD_IMAGE_NAMESPACE:-rainbond}
+IMAGE_NAMESPACE=${BUILD_IMAGE_NAMESPACE:-yangk}
 DOMESTIC_BASE_NAME=${DOMESTIC_BASE_NAME:-'registry.cn-hangzhou.aliyuncs.com'}
-DOMESTIC_NAMESPACE=${DOMESTIC_NAMESPACE:-'goodrain'}
+DOMESTIC_NAMESPACE=${DOMESTIC_NAMESPACE:-'yangkaa'}
 
 if [ -z "$VERSION" ]; then
   if [ -z "$TRAVIS_TAG" ]; then
