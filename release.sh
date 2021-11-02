@@ -1,8 +1,8 @@
 #!/bin/bash
 IMAGE_DOMAIN=${BUILD_IMAGE_DOMAIN:-docker.io}
-IMAGE_NAMESPACE=${BUILD_IMAGE_NAMESPACE:-rainbond}
+IMAGE_NAMESPACE=${BUILD_IMAGE_NAMESPACE:-yangk}
 DOMESTIC_BASE_NAME=${DOMESTIC_BASE_NAME:-'registry.cn-hangzhou.aliyuncs.com'}
-DOMESTIC_NAMESPACE=${DOMESTIC_NAMESPACE:-'goodrain'}
+DOMESTIC_NAMESPACE=${DOMESTIC_NAMESPACE:-'yangkaa'}
 
 if [ -z "$VERSION" ]; then
   if [ -z "$TRAVIS_TAG" ]; then
@@ -36,7 +36,7 @@ function release_allinone() {
   git_commit=$(git log -n 1 --pretty --format=%h)
   buildTime=$(date +%F-%H)
   release_desc=${VERSION}-${git_commit}-${buildTime}-allinone
-  image_name="rainbond"
+  image_name="yangk"
   imageName=${IMAGE_DOMAIN}/${IMAGE_NAMESPACE}/${image_name}:${VERSION}-allinone
   docker build --network=host --build-arg VERSION="${VERSION}" --build-arg RELEASE_DESC="${release_desc}" -t "${imageName}" -f Dockerfile.allinone .
   if [ $? -ne 0 ]; then
