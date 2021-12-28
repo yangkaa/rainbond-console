@@ -124,6 +124,8 @@ class JSONWebTokenAuthentication(BaseJSONWebTokenAuthentication):
 
             user = self.authenticate_credentials(payload)
             jwt_manager.set(jwt_value, user.user_id)
+            if request.method != "GET" and user.get_username() != "admin":
+                raise exceptions.AuthenticationFailed(_('试用环境无法进行此操作'))
             return user, jwt_value
 
     def authenticate_credentials(self, payload):
