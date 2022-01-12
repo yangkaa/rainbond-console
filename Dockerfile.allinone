@@ -53,8 +53,7 @@ COPY --from=builder /go/src/goodrain.com/cloud-adaptor/chart /app/chart
 COPY --from=builder /cloud-adaptor /app/cloudadaptor
 ADD . /app/ui
 WORKDIR /app/ui
-RUN git clone -b v2.2.0-dind --depth=1 https://github.com/goodrain/rainbond-operator.git /app/ui/rainbond-operator && \ 
-    wget https://rainbond-pkg.oss-cn-shanghai.aliyuncs.com/images-pkg/rainbond.tar && \
+RUN git clone -b v2.2.0-dind --depth=1 https://github.com/goodrain/rainbond-operator.git /app/ui/rainbond-operator && \
     chmod +x /app/ui/entrypoint.sh /app/ui/start.sh /app/ui/k3s.sh  /app/ui/init_rainbond.sh && \
     mv /app/ui/supervisord.conf /etc/supervisor/supervisord.conf && \
     mv /app/ui/rainbond.conf /etc/supervisor/conf.d/rainbond.conf && \
