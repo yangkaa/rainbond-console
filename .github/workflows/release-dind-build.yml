@@ -2,7 +2,7 @@ name: release-dind-build
 
 on:
   release:
-    branches: [550-dind, V5.4]
+    branches: [550-dind, 550-dind-0112, V5.4]
   workflow_dispatch:
 
 jobs:
