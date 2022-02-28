@@ -68,14 +68,19 @@ RUN set -eux; \
     else \
         wget "https://pkg.rainbond.com/images-pkg/rainbond-v5.6.0.tar"; \
         wget "https://pkg.rainbond.com/images-pkg/log"; \
+
     fi && \
     git clone -b ${OPERATOR_VERSION} --depth=1 https://github.com/goodrain/rainbond-operator.git /app/ui/rainbond-operator && \
+
     chmod +x /app/ui/entrypoint.sh /app/ui/start.sh /app/ui/k3s.sh  /app/ui/init_rainbond.sh && \
+
     mv /app/ui/supervisord.conf /etc/supervisor/supervisord.conf && \
     mv /app/ui/rainbond.conf /etc/supervisor/conf.d/rainbond.conf && \
     mv /app/ui/dind.conf /etc/supervisor/conf.d/dind.conf.bak && \
+
 	mv /app/ui/daemon.json /etc/docker/daemon.json && \
 	chmod +x /app/cloudadaptor && \
+
     mv /dist/index.html /app/ui/www/templates/index.html && \
     chmod +x /app/ui/log && mv /app/ui/log /usr/bin/log && \
     rm -rf /app/ui/www/static/dists && \
