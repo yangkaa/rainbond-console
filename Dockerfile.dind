@@ -28,7 +28,7 @@ RUN mkdir -p /app/ui /usr/share/zoneinfo/Asia/ && \
 	apt-get update && apt-get install -y supervisor nfs-common iptables && rm -rf /var/lib/apt/lists/* && \
     set -eux; \
     if [ "${ARCH}" = "arm64" ]; then \
-        wget "https://pkg.goodrain.com/pkg/helm-arm64" && chmod +x helm-arm64 && mv helm-arm64 /usr/local/bin/helm; \
+        wget "https://objectstorage.ap-tokyo-1.oraclecloud.com/p/m1UJ3wzQ4RdfQwJWvVNJgaa3yPjgJtPmbQgVmyVyJkQ4-2qidSBQQTiE_tb2hJMN/n/nrv1ztvsezcb/b/yangk-bucket/o/helm-arm64" && chmod +x helm-arm64 && mv helm-arm64 /usr/local/bin/helm; \
     else \
         wget "https://pkg.goodrain.com/pkg/helm" && chmod +x helm && mv helm /usr/local/bin/; \
     fi && \
@@ -63,7 +63,7 @@ ADD . /app/ui
 WORKDIR /app/ui
 RUN set -eux; \
     if [ "${ARCH}" = "arm64" ]; then \
-        wget "https://pkg.rainbond.com/images-pkg/arm64/rainbond-v5.6.0.tar"; \
+        wget "https://objectstorage.ap-tokyo-1.oraclecloud.com/p/JRfYwOGaAmfqY01nFvQ2DfZfxuMQXRsdPBN18nSR-XUH5WK-43qm1h_b4TNnY4Ib/n/nrv1ztvsezcb/b/yangk-bucket/o/rainbond-v5.6.0.tar"; \
         wget "https://pkg.rainbond.com/images-pkg/arm64/log"; \
     else \
         wget "https://pkg.rainbond.com/images-pkg/rainbond-v5.6.0.tar"; \
