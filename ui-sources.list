@@ -1,0 +1,6 @@
+# deb http://snapshot.debian.org/archive/debian/20210721T000000Z stretch main
+deb http://mirrors.aliyun.com/debian stretch main
+# deb http://snapshot.debian.org/archive/debian-security/20210721T000000Z stretch/updates main
+deb http://mirrors.aliyun.com/debian-security stretch/updates main
+# deb http://snapshot.debian.org/archive/debian/20210721T000000Z stretch-updates main
+deb http://mirrors.aliyun.com/debian stretch-updates main

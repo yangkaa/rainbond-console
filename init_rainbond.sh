@@ -41,7 +41,7 @@ if [ "$HELM_INSTALL" != "rainbond-operator" ]; then
   fi
   (helm install rainbond-operator /app/chart -n rbd-system --kubeconfig /root/.kube/config \
       --set operator.image.name=registry.cn-hangzhou.aliyuncs.com/${DOMESTIC_NAMESPACE}/rainbond-operator \
-      --set operator.image.tag=${VERSION}) &>> /app/logs/init_rainbond.log
+      --set operator.image.tag=${arch_image_tag}) &>> /app/logs/init_rainbond.log
 fi
 # 修改yaml
 sed -i "s/single_node_name/$NODE_NAME/" /app/ui/rainbond-operator/config/single_node_cr/rbdcluster.yml
