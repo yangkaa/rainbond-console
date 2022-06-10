@@ -32,8 +32,8 @@ HELM_INSTALL=$(/usr/local/bin/helm list -n rbd-system | sed -n 2p | awk '{print 
 if [ "$HELM_INSTALL" != "rainbond-operator" ]; then
   ARCH=$(uname -m)
   if [ "$ARCH" = "aarch64" ]; then
-      arch_image_tag="v2.3.0-arm64"
-      sed -i "s/v5.6.0-release/v5.6.0-release-arm64/g" $(grep -rl v5.6.0-release /app/ui/rainbond-operator/config/single_node_cr/*)
+      arch_image_tag="${VERSION}-arm64"
+      sed -i "s/v5.6.0-release/${arch_image_tag}/g" $(grep -rl v5.6.0-release /app/ui/rainbond-operator/config/single_node_cr/*)
   elif [ "$ARCH" = "x86_64" ]; then
       arch_image_tag=${VERSION}
       sed -i "s/goodrain/${DOMESTIC_NAMESPACE}/g" $(grep -rl goodrain /app/ui/rainbond-operator/config/single_node_cr/*)

@@ -71,7 +71,7 @@ ARG DOMESTIC_NAMESPACE=goodrain
 ARG CLONE_URL=https://github.com/goodrain
 RUN set -eux; \
     if [ "${ARCH}" = "arm64" ]; then \
-        wget "https://pkg.rainbond.com/images-pkg/arm64/rainbond-v5.6.0.tar"; \
+        wget "https://pkg.rainbond.com/images-pkg/arm64/rainbond-${VERSION}.tar"; \
         wget "https://pkg.rainbond.com/images-pkg/arm64/log"; \
     else \
         wget "https://rainbond-pkg.oss-cn-shanghai.aliyuncs.com/images-pkg/rainbond-${VERSION}.tar"; \
