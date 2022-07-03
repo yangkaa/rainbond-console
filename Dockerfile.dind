@@ -9,8 +9,8 @@ ENV CGO_ENABLED=1
 ENV GOPATH=/go
 ARG DOMESTIC_NAMESPACE=goodrain
 ENV DOMESTIC_NAMESPACE=${DOMESTIC_NAMESPACE}
-RUN git clone -b ${VERSION} --depth=1 ${CLONE_URL}/cloud-adaptor /go/src/goodrain.com/cloud-adaptor
-WORKDIR /go/src/goodrain.com/cloud-adaptor/
+RUN git clone -b ${VERSION} --depth=1 ${CLONE_URL}/cloud-adaptor ./go/src/goodrain.com/cloud-adaptor
+WORKDIR ./go/src/goodrain.com/cloud-adaptor/
 ARG LDFLAGS
 RUN go build -ldflags "$LDFLAGS" -o /cloud-adaptor $PWD/cmd/cloud-adaptor
 
