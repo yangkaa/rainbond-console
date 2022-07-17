@@ -1087,15 +1087,10 @@ class ComponentK8sAttributes(BaseModel):
     tenant_id = models.CharField(max_length=32)
     component_id = models.CharField(max_length=32, help_text="the identity of the component")
     # Name Define the attribute name, which is currently supported
-    # [nodeSelector/label/tolerations/secret/persistentVolumeClaim/serviceAccountName/privileged/nodeAffinity]
+    # [nodeSelector/labels/tolerations/volumes/serviceAccountName/privileged/affinity]
     name = models.CharField(max_length=255, help_text="the name of the attribute")
-    # The field type defines how the attribute is stored. Currently, JSON and string are supported
+    # The field type defines how the attribute is stored. Currently, `json/yaml/string` are supported
     save_type = models.CharField(max_length=32)
-    # Define the fields supported by the property, separated by commas.
-    # e.g. Tolerations following fields are supported: [key/operator/value/effect]
-    # Then the value of this field should be: "key,operator,value,effect"
-    # The fields here are configurable by the user on the console
-    attribute_fields = models.TextField(help_text="the attribute fields")
     # Define the attribute value, which is stored in the database.
-    # The value is stored in the database in the form of JSON or string.
+    # The value is stored in the database in the form of `json/yaml/string`.
     attribute_value = models.TextField(help_text="the attribute value")
