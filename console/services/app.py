@@ -1080,7 +1080,7 @@ class AppMarketService(object):
                 versions = []
                 for version in dt.versions:
                     versions.append({
-                        "is_plugin": version.is_plugin,
+                        # "is_plugin": version.is_plugin,
                         "app_key_id": version.app_key_id,
                         "app_version": version.app_version,
                         "app_version_alias": version.app_version_alias,

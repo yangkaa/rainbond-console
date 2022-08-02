@@ -22,6 +22,7 @@ from console.constants import PluginInjection
 from www.models.main import ServiceDomain
 # www
 from www.apiclient.regionapi import RegionInvokeApi
+from ...repositories.region_app import region_app_repo
 
 region_api = RegionInvokeApi()
 
@@ -43,10 +44,12 @@ class MarketApp(object):
     def sync_new_app(self):
         self._sync_new_components()
         self._sync_app_config_groups(self.new_app)
+        self._sync_app_k8s_resources(self.new_app)
 
     def rollback(self):
         self._rollback_components()
         self._sync_app_config_groups(self.original_app)
+        self._sync_app_k8s_resources(self.original_app)
 
     def deploy(self):
         builds = self._generate_builds()
@@ -333,6 +336,29 @@ class MarketApp(object):
             "app_config_groups": config_groups,
         }
         region_api.sync_config_groups(self.tenant_name, self.region_name, self.new_app.region_app_id, body)
+
+    def _sync_app_k8s_resources(self, app):
+        k8s_resources = list()
+        region_app_id = region_app_repo.get_region_app_id(self.region_name, self.app_id)
+        for k8s_resource in app.k8s_resources:
+            resource = {
+                "name": k8s_resource.name,
+                "app_id": region_app_id,
+                "namespace": app.tenant.namespace,
+                "kind": k8s_resource.kind,
+                "resource_yaml": k8s_resource.content,
+            }
+            k8s_resources.append(resource)
+        data = {
+            "k8s_resources": k8s_resources,
+        }
+        res, body = region_api.sync_k8s_resources(self.tenant_name, self.region_name, data)
+        resource_statuses = {resource["name"]+resource["kind"]: resource for resource in body["list"]}
+        for k8s_resource in app.k8s_resources:
+            resource_key = k8s_resource.name + k8s_resource.kind
+            if resource_statuses.get(resource_key):
+                k8s_resource.status = resource_statuses[resource_key]["status"]
+                k8s_resource.success = resource_statuses[resource_key]["success"]
 
     def list_original_plugins(self):
         plugins = plugin_repo.list_by_tenant_id(self.original_app.tenant_id, self.region_name)

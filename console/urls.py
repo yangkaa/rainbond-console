@@ -126,7 +126,7 @@ from console.views.user_operation import (ChangeLoginPassword, PasswordResetBegi
 from console.views.webhook import (CustomWebHooksDeploy, GetWebHooksUrl, ImageWebHooksDeploy, ImageWebHooksTrigger,
                                    UpdateSecretKey, WebHooksDeploy, WebHooksStatus)
 from console.views.custom_configs import CustomConfigsCLView
-from console.views.yaml_resource import YamlResourceName
+# from console.views.yaml_resource import YamlResourceName
 
 urlpatterns = [
     # record error logs
@@ -232,7 +232,7 @@ urlpatterns = [
     url(r'^teams/(?P<team_name>[\w\-]+)/overview$', TeamOverView.as_view(), perms.TeamOverView),
     # 总览 获取应用状态
     url(r'^teams/(?P<team_name>[\w\-]+)/overview/services/status$', AllServiceInfo.as_view(), perms.AllServiceInfo),
-    url(r'^teams/(?P<team_name>[\w\-]+)/resource-name$', YamlResourceName.as_view()),
+    # url(r'^teams/(?P<team_name>[\w\-]+)/resource-name$', YamlResourceName.as_view()),
     url(r'^teams/(?P<team_name>[\w\-]+)/convert-resource$', TeamOverView.as_view()),
     url(r'^teams/(?P<team_name>[\w\-]+)/resource-import$', TeamOverView.as_view()),
 

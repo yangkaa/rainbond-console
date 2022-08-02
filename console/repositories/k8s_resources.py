@@ -28,5 +28,11 @@ class AppK8sResourceRepo(object):
     def get_by_id(self, id):
         return K8sResource.objects.get(ID=id)
 
+    @staticmethod
+    def bulk_create_or_update(k8s_resources):
+        k8s_resource_ids = [rs.ID for rs in k8s_resources]
+        K8sResource.objects.filter(ID__in=k8s_resource_ids).delete()
+        K8sResource.objects.bulk_create(k8s_resources)
+
 
 k8s_resources_repo = AppK8sResourceRepo()
