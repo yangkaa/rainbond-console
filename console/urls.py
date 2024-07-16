@@ -131,7 +131,7 @@ from console.views.service_share import ServiceShareRecordView, ShareRecordView,
     AppMarketOrgModelLView, AppMarketAppModelVersionsLView, AppMarketAppModelLView, AppMarketCLView, AppMarketRUDView, \
     AppMarketBatchCView
 from console.views.service_version import AppVersionsView, AppVersionManageView
-from console.views.services_toplogical import TopologicalGraphView, GroupServiceDetView, TopologicalInternetView
+from console.views.services_toplogical import TopologicalGraphView, GroupServiceDetView, TopologicalInternetView, TopologicalGraphStatusView
 from console.views.task_guidance import BaseGuidance
 from console.views.team import UserFuzSerView, TeamUserDetaislView, TeamCheckResourceName, TeamSortServiceQueryView, \
     TeamCheckKubernetesServiceName, TeamRegistryAuthLView, TeamRegistryAuthRUDView, AddTeamView, TeamUserView, \
@@ -315,6 +315,10 @@ urlpatterns = [
     url(r'^teams/(?P<team_name>[\w\-]+)/operator-managed$', GroupOperatorManagedView.as_view(), perms.APP_OVERVIEW_PERMS),
     # 应用拓扑图
     url(r'^teams/(?P<team_name>[\w\-]+)/regions/(?P<region_name>[\w\-]+)/topological$', TopologicalGraphView.as_view(),
+        perms.APP_OVERVIEW_PERMS),
+    # 应用拓扑图状态数据
+    url(r'^teams/(?P<team_name>[\w\-]+)/regions/(?P<region_name>[\w\-]+)/topological/status$',
+        TopologicalGraphStatusView.as_view(),
         perms.APP_OVERVIEW_PERMS),
     # 拓扑图中应用详情
     url(r'^teams/(?P<team_name>[\w\-]+)/topological/services/(?P<serviceAlias>[\w\-]+)$', GroupServiceDetView.as_view(),

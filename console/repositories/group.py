@@ -112,6 +112,9 @@ class GroupRepository(object):
             return self.add_group(tenant=tenant, region_name=region_name, group_name="默认应用", is_default=True)
         return group
 
+    def get_group_exists_by_team_id_and_group_id(self, team_id, group_id):
+        return ServiceGroup.objects.filter(tenant_id=team_id, ID=group_id).exists()
+
     def create_region_app(self, tenant, region_name, app, eid=""):
         region_app = region_api.create_application(
             region_name, tenant.tenant_name, {
