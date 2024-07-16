@@ -776,11 +776,9 @@ class RegionInvokeApi(RegionApiBaseHttpClient):
     def service_status(self, region, tenant_name, body):
         """获取多个组件的状态"""
 
-        url, token = self.__get_region_access_info(tenant_name, region)
-        tenant_region = self.__get_tenant_region_info(tenant_name, region)
-        url = url + "/v2/tenants/" + tenant_region.region_tenant_name + "/services_status"
-
-        self._set_headers(token)
+        region_info = self.get_region_info(region)
+        url = region_info.url + "/v2/tenants/" + tenant_name + "/services_status"
+        self._set_headers(region_info.token)
         res, body = self._post(url, self.default_headers, region=region, body=json.dumps(body), timeout=20)
         return body
 

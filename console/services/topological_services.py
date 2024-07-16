@@ -74,13 +74,13 @@ class TopologicalService(object):
     def get_group_topological_graph(self, group_id, region, team_name, enterprise_id):
         topological_info = dict()
         service_group_relation_list = ServiceGroupRelation.objects.filter(group_id=group_id)
-        service_id_list = [x.service_id for x in service_group_relation_list]
+        service_id_list = list(service_group_relation_list.values_list('service_id', flat=True))
         # 查询组件依赖信息
         service_relation_list = TenantServiceRelation.objects.filter(service_id__in=service_id_list)
-        dep_service_id_list = [x.dep_service_id for x in service_relation_list]
+        dep_service_id_list = list(service_relation_list.values_list('dep_service_id', flat=True))
 
         # 查询组件、依赖组件信息
-        all_service_id_list = list(set(dep_service_id_list).union(set(service_id_list)))
+        all_service_id_list = list(set(service_id_list + dep_service_id_list))
         service_list = TenantServiceInfo.objects.filter(service_id__in=all_service_id_list)
         service_map = {x.service_id: x for x in service_list}
         json_data = {}
@@ -88,94 +88,93 @@ class TopologicalService(object):
         service_status_map = {}
 
         # 查询每个组件所属应用信息
-        component_rel_list = ServiceGroupRelation.objects.filter(service_id__in=all_service_id_list)
+        # component_rel_list = ServiceGroupRelation.objects.filter(service_id__in=all_service_id_list)
         app_ids = []
         # component_id_with_app_id_rels = {}
-        component_ids_under_app = {}
+        # component_ids_under_app = {}
         app_statuses = {}
-        for rel in component_rel_list:
-            app_ids.append(rel.group_id)
-            # component_id_with_app_id_rels[rel.service_id] = rel.group_id
-            app_statuses[rel.group_id] = AppStatus_NIL
-            if not component_ids_under_app.get(rel.group_id):
-                component_ids_under_app[rel.group_id] = []
-            component_ids_under_app[rel.group_id].append(rel.service_id)
+        # for rel in component_rel_list:
+        #     app_ids.append(rel.group_id)
+        #     # component_id_with_app_id_rels[rel.service_id] = rel.group_id
+        #     app_statuses[rel.group_id] = AppStatus_NIL
+        #     if not component_ids_under_app.get(rel.group_id):
+        #         component_ids_under_app[rel.group_id] = []
+        #     component_ids_under_app[rel.group_id].append(rel.service_id)
 
-        app_list = ServiceGroup.objects.filter(ID__in=app_ids)
-        apps = {app.app_id: app for app in app_list}
-        component_rels = {rel.service_id: apps.get(rel.group_id, {}) for rel in component_rel_list}
+        # app_list = ServiceGroup.objects.filter(ID__in=app_ids)
+        # apps = {app.app_id: app for app in app_list}
+        # component_rels = {rel.service_id: apps.get(rel.group_id, {}) for rel in component_rel_list}
+        component_rels = {}
 
         # 批量查询组件状态
-        if len(service_list) > 0:
-            try:
-                service_status_list = region_api.service_status(region, team_name, {
-                    "service_ids": all_service_id_list,
-                    "enterprise_id": enterprise_id
-                })
-                service_status_list = service_status_list["list"]
-                if service_status_list:
-                    service_status_map = {status_map["service_id"]: status_map for status_map in service_status_list}
-            except Exception as e:
-                logger.error('batch query service status failed!')
-                logger.exception(e)
-        for app_id in component_ids_under_app:
-            component_statuses = [
-                service_status_map.get(component_id, {}).get("status", "unknown")
-                for component_id in component_ids_under_app[app_id]
-            ]
-            app_statuses[app_id] = self.get_app_status(component_statuses)
+        # if len(service_list) > 0:
+        # if not service_list.exists():
+        #     try:
+        #         service_status_list = region_api.service_status(region, team_name, {
+        #             "service_ids": all_service_id_list,
+        #             "enterprise_id": enterprise_id
+        #         })
+        #         service_status_list = service_status_list["list"]
+        #         if service_status_list:
+        #             service_status_map = {status_map["service_id"]: status_map for status_map in service_status_list}
+        #     except Exception as e:
+        #         logger.error('batch query service status failed!')
+        #         logger.exception(e)
+        # for app_id in component_ids_under_app:
+        #     component_statuses = [
+        #         service_status_map.get(component_id, {}).get("status", "unknown")
+        #         for component_id in component_ids_under_app[app_id]
+        #     ]
+        #     app_statuses[app_id] = self.get_app_status(component_statuses)
 
         # 拼接组件状态
-        try:
-            dynamic_services_info = region_api.get_dynamic_services_pods(region, team_name,
-                                                                         [service.service_id for service in service_list])
-            dynamic_services_list = dynamic_services_info["list"]
-        except Exception as e:
-            logger.exception(e)
-            dynamic_services_list = []
-        region_app_id = region_app_repo.get_region_app_id(region, group_id)
-        watch_managed_data = base_service.get_watch_managed(region, team_name, region_app_id)
-        deployments = watch_managed_data.get("deployments", [])
-        statefulSets = watch_managed_data.get("statefulSets", [])
-        services = watch_managed_data.get("services", [])
-        component_dict = dict()
+        # try:
+        #     dynamic_services_info = region_api.get_dynamic_services_pods(region, team_name,
+        #                                                                  [service.service_id for service in service_list])
+        #     dynamic_services_list = dynamic_services_info["list"]
+        # except Exception as e:
+        #     logger.exception(e)
+        #     dynamic_services_list = []
+        # region_app_id = region_app_repo.get_region_app_id(region, group_id)
+        # watch_managed_data = base_service.get_watch_managed(region, team_name, region_app_id)
+        # deployments = watch_managed_data.get("deployments", [])
+        # statefulSets = watch_managed_data.get("statefulSets", [])
+        # services = watch_managed_data.get("services", [])
+        # component_dict = dict()
+        #
+        # def components_handle(components, kind):
+        #     for component in components:
+        #         service_id = make_uuid3(component.get("name"))
+        #         cpu, memory, disk = 0, 0, 0
+        #         for pod in component.get("pods", []):
+        #             memory = memory + pod.get("memory", 0) / 1024 / 1024
+        #             cpu = cpu + pod.get("cpu", 0)
+        #             disk = disk + pod.get("disk", 0) / 1024 / 1024
+        #         component_dict[component.get("name")] = service_id
+        #         json_data[service_id] = {
+        #             "service_id": service_id,
+        #             "service_cname": component.get("name"),
+        #             "service_alias": component.get("name"),
+        #             "component_memory": memory,
+        #             "component_cpu": cpu,
+        #             "component_disk": disk,
+        #             "runtime": component.get("runtime"),
+        #             "readyReplicas": component.get("readyReplicas", 0),
+        #             "cur_status": "operator",
+        #             "kind": kind,
+        #             "pod": component.get("pods", []),
+        #         }
+        #
+        # components_handle(deployments, "Deployment")
+        # components_handle(statefulSets, "StatefulSet")
+        # service_dict = dict()
+        # for service in services:
+        #     service_dict[service.get("name")] = service.get("relation", [])
 
-        def components_handle(components, kind):
-            for component in components:
-                service_id = make_uuid3(component.get("name"))
-                cpu, memory, disk = 0, 0, 0
-                for pod in component.get("pods", []):
-                    memory = memory + pod.get("memory", 0) / 1024 / 1024
-                    cpu = cpu + pod.get("cpu", 0)
-                    disk = disk + pod.get("disk", 0) / 1024 / 1024
-                component_dict[component.get("name")] = service_id
-                json_data[service_id] = {
-                    "service_id": service_id,
-                    "service_cname": component.get("name"),
-                    "service_alias": component.get("name"),
-                    "component_memory": memory,
-                    "component_cpu": cpu,
-                    "component_disk": disk,
-                    "runtime": component.get("runtime"),
-                    "readyReplicas": component.get("readyReplicas", 0),
-                    "cur_status": "operator",
-                    "kind": kind,
-                    "pod": component.get("pods", []),
-                }
-
-        components_handle(deployments, "Deployment")
-        components_handle(statefulSets, "StatefulSet")
-        service_dict = dict()
-        for service in services:
-            service_dict[service.get("name")] = service.get("relation", [])
-        for service_info in service_list:
-            node_num = 0
-            if dynamic_services_list:
-                for dynamic_service in dynamic_services_list:
-                    if dynamic_service["service_id"] == service_info.service_id:
-                        node_num += 1
-            else:
-                node_num = service_info.min_node
+        outerServices = set(
+            TenantServicesPort.objects.filter(service_id__in=all_service_id_list, is_outer_service=True).values_list(
+                'service_id', flat=True))
+        for service_info in service_map.values():
             app = component_rels.get(service_info.service_id)
             app_id = app.ID if app else 0
             json_data[service_info.service_id] = {
@@ -183,19 +182,215 @@ class TopologicalService(object):
                 "service_cname": service_info.service_cname,
                 "service_alias": service_info.service_alias,
                 "service_source": service_info.service_source,
-                "component_memory": service_info.min_memory * node_num,
-                "node_num": node_num,
+                "component_memory": service_info.min_memory * service_info.min_node,
+                "node_num": service_info.min_node,
                 "app_id": app_id,
                 "app_type": app.app_type if app else "rainbond",
                 "app_name": app.group_name if app else "404 not found",
                 "app_status": app_statuses.get(app_id, "NIL"),
             }
-            name = service_info.service_cname[:-4]
-            component_ids = [component_dict.get(relation) for relation in service_dict.get(name, [])]
-            json_svg[service_info.service_id] = component_ids
-            if service_status_map.get(service_info.service_id):
-                status = service_status_map.get(service_info.service_id).get("status", "Unknown")
-                status_cn = service_status_map.get(service_info.service_id).get("status_cn", None)
+            json_svg[service_info.service_id] = []
+            json_data[service_info.service_id]['is_internet'] = False
+            if service_info.service_id in outerServices:
+                json_data[service_info.service_id]['is_internet'] = True
+
+        # for service_info in service_map.values():
+        #     app = component_rels.get(service_info.service_id)
+        #     app_id = app.ID if app else 0
+        #     json_data[service_info.service_id] = {
+        #         "service_id": service_info.service_id,
+        #         "service_cname": service_info.service_cname,
+        #         "service_alias": service_info.service_alias,
+        #         "service_source": service_info.service_source,
+        #         "component_memory": service_info.min_memory * service_info.min_node,
+        #         "node_num": service_info.min_node,
+        #         "app_id": app_id,
+        #         "app_type": app.app_type if app else "rainbond",
+        #         "app_name": app.group_name if app else "404 not found",
+        #         "app_status": app_statuses.get(app_id, "NIL"),
+        #     }
+        #     # name = service_info.service_cname[:-4]
+        #     # component_ids = [component_dict.get(relation) for relation in service_dict.get(name, [])]
+        #     json_svg[service_info.service_id] = []
+        #     if service_status_map.get(service_info.service_id):
+        #         status = service_status_map.get(service_info.service_id).get("status", "Unknown")
+        #         status_cn = service_status_map.get(service_info.service_id).get("status_cn", None)
+        #     else:
+        #         status = None
+        #         status_cn = None
+        #     if status:
+        #         if not status_cn:
+        #             from www.utils.status_translate import status_map
+        #             status_info_map = status_map().get(status, None)
+        #             if not status_info_map:
+        #                 status_cn = "未知"
+        #             else:
+        #                 status_cn = status_info_map["status_cn"]
+        #         json_data[service_info.service_id]['cur_status'] = status
+        #         json_data[service_info.service_id]['status_cn'] = status_cn
+        #     else:
+        #         if service_info.create_status != "complete":
+        #             json_data[service_info.service_id]['cur_status'] = 'creating'
+        #             json_data[service_info.service_id]['status_cn'] = '创建中'
+        #         else:
+        #             json_data[service_info.service_id]['cur_status'] = 'Unknown'
+        #             json_data[service_info.service_id]['status_cn'] = '未知'
+        #
+        #     if json_data[service_info.service_id]["service_source"] == "third_party":
+        #         json_data[service_info.service_id]['cur_status'] = "third_party"
+        #
+        #     # # 查询是否打开对外组件端口
+        #     # port_list = TenantServicesPort.objects.filter(service_id=service_info.service_id)
+        #     # # 判断组件是否有对外端口
+        #     # outer_port_exist = False
+        #     # if len(port_list) > 0:
+        #     #     outer_port_exist = reduce(lambda x, y: x or y, [t.is_outer_service for t in list(port_list)])
+        #     json_data[service_info.service_id]['is_internet'] = False
+        #     if service_info.service_id in outerServices:
+        #         json_data[service_info.service_id]['is_internet'] = True
+        #     # json_data[service_info.service_id]['is_internet'] = TenantServicesPort.objects.filter(service_id=service_info.service_id, is_outer_service=True).exists()
+
+        for service_relation in service_relation_list:
+            tmp_id = service_relation.service_id
+            tmp_info = service_map.get(tmp_id)
+            if tmp_info:
+                tmp_dep_id = service_relation.dep_service_id
+                tmp_dep_info = service_map.get(tmp_dep_id)
+                # 依赖组件的cname
+                if tmp_dep_info:
+                    tmp_info_relation = []
+                    if tmp_info.service_id in set(json_svg.keys()):
+                        tmp_info_relation = json_svg.get(tmp_info.service_id)
+                    tmp_info_relation.append(tmp_dep_info.service_id)
+                    json_svg[tmp_info.service_id] = tmp_info_relation
+
+        topological_info["json_data"] = json_data
+        topological_info["json_svg"] = json_svg
+        return topological_info
+
+    def get_group_topological_graph_status(self, component_ids, region, team_name, enterprise_id):
+        topological_info = dict()
+        # service_group_relation_list = ServiceGroupRelation.objects.filter(group_id=group_id)
+        # service_id_list = list(service_group_relation_list.values_list('service_id', flat=True))
+        # 查询组件依赖信息
+        # service_relation_list = TenantServiceRelation.objects.filter(service_id__in=service_id_list)
+        # dep_service_id_list = list(service_relation_list.values_list('dep_service_id', flat=True))
+
+        # 查询组件、依赖组件信息
+        # all_service_id_list = list(set(service_id_list + dep_service_id_list))
+        # service_list = TenantServiceInfo.objects.filter(service_id__in=all_service_id_list)
+        # service_map = {x.service_id: x for x in service_list}
+        json_data = {}
+        # json_svg = {}
+        service_status_map = {}
+
+        # 查询每个组件所属应用信息
+        # component_rel_list = ServiceGroupRelation.objects.filter(service_id__in=all_service_id_list)
+        app_ids = []
+        # component_id_with_app_id_rels = {}
+        # component_ids_under_app = {}
+        app_statuses = {}
+        # for rel in component_rel_list:
+        #     app_ids.append(rel.group_id)
+        #     # component_id_with_app_id_rels[rel.service_id] = rel.group_id
+        #     app_statuses[rel.group_id] = AppStatus_NIL
+        #     if not component_ids_under_app.get(rel.group_id):
+        #         component_ids_under_app[rel.group_id] = []
+        #     component_ids_under_app[rel.group_id].append(rel.service_id)
+
+        # app_list = ServiceGroup.objects.filter(ID__in=app_ids)
+        # apps = {app.app_id: app for app in app_list}
+        # component_rels = {rel.service_id: apps.get(rel.group_id, {}) for rel in component_rel_list}
+        component_rels = {}
+
+        # 批量查询组件状态
+        # if len(service_list) > 0:
+        # if not service_list.exists():
+        try:
+            service_status_list = region_api.service_status(region, team_name, {
+                "service_ids": component_ids,
+                "enterprise_id": enterprise_id
+            })
+            service_status_list = service_status_list["list"]
+            if service_status_list:
+                service_status_map = {status_map["service_id"]: status_map for status_map in service_status_list}
+        except Exception as e:
+            logger.error('batch query service status failed!')
+            logger.exception(e)
+        # for app_id in component_ids_under_app:
+        #     component_statuses = [
+        #         service_status_map.get(component_id, {}).get("status", "unknown")
+        #         for component_id in component_ids_under_app[app_id]
+        #     ]
+        #     app_statuses[app_id] = self.get_app_status(component_statuses)
+
+        # 拼接组件状态
+        # try:
+        #     dynamic_services_info = region_api.get_dynamic_services_pods(region, team_name,
+        #                                                                  [service.service_id for service in service_list])
+        #     dynamic_services_list = dynamic_services_info["list"]
+        # except Exception as e:
+        #     logger.exception(e)
+        #     dynamic_services_list = []
+        # region_app_id = region_app_repo.get_region_app_id(region, group_id)
+        # watch_managed_data = base_service.get_watch_managed(region, team_name, region_app_id)
+        # deployments = watch_managed_data.get("deployments", [])
+        # statefulSets = watch_managed_data.get("statefulSets", [])
+        # services = watch_managed_data.get("services", [])
+        # component_dict = dict()
+        #
+        # def components_handle(components, kind):
+        #     for component in components:
+        #         service_id = make_uuid3(component.get("name"))
+        #         cpu, memory, disk = 0, 0, 0
+        #         for pod in component.get("pods", []):
+        #             memory = memory + pod.get("memory", 0) / 1024 / 1024
+        #             cpu = cpu + pod.get("cpu", 0)
+        #             disk = disk + pod.get("disk", 0) / 1024 / 1024
+        #         component_dict[component.get("name")] = service_id
+        #         json_data[service_id] = {
+        #             "service_id": service_id,
+        #             "service_cname": component.get("name"),
+        #             "service_alias": component.get("name"),
+        #             "component_memory": memory,
+        #             "component_cpu": cpu,
+        #             "component_disk": disk,
+        #             "runtime": component.get("runtime"),
+        #             "readyReplicas": component.get("readyReplicas", 0),
+        #             "cur_status": "operator",
+        #             "kind": kind,
+        #             "pod": component.get("pods", []),
+        #         }
+        #
+        # components_handle(deployments, "Deployment")
+        # components_handle(statefulSets, "StatefulSet")
+        # service_dict = dict()
+        # for service in services:
+        #     service_dict[service.get("name")] = service.get("relation", [])
+
+        # outerServices = set(TenantServicesPort.objects.filter(service_id__in=all_service_id_list, is_outer_service=True).values_list('service_id', flat=True))
+        for component_id in component_ids:
+            app = component_rels.get(component_id)
+            app_id = app.ID if app else 0
+            json_data[component_id] = {
+                "service_id": component_id,
+                # "service_cname": service_info.service_cname,
+                # "service_alias": service_info.service_alias,
+                # "service_source": service_info.service_source,
+                # "component_memory": service_info.min_memory * service_info.min_node,
+                # "node_num": service_info.min_node,
+                "app_id": app_id,
+                "app_type": app.app_type if app else "rainbond",
+                "app_name": app.group_name if app else "404 not found",
+                "app_status": app_statuses.get(app_id, "NIL"),
+            }
+            # json_svg[component_id] = []
+
+        for component_id in component_ids:
+            # json_svg[component_id] = []
+            if service_status_map.get(component_id):
+                status = service_status_map.get(component_id).get("status", "Unknown")
+                status_cn = service_status_map.get(component_id).get("status_cn", None)
             else:
                 status = None
                 status_cn = None
@@ -207,43 +402,45 @@ class TopologicalService(object):
                         status_cn = "未知"
                     else:
                         status_cn = status_info_map["status_cn"]
-                json_data[service_info.service_id]['cur_status'] = status
-                json_data[service_info.service_id]['status_cn'] = status_cn
+                json_data[component_id]['cur_status'] = status
+                json_data[component_id]['status_cn'] = status_cn
             else:
-                if service_info.create_status != "complete":
-                    json_data[service_info.service_id]['cur_status'] = 'creating'
-                    json_data[service_info.service_id]['status_cn'] = '创建中'
-                else:
-                    json_data[service_info.service_id]['cur_status'] = 'Unknown'
-                    json_data[service_info.service_id]['status_cn'] = '未知'
+                # if service_info.create_status != "complete":
+                #     json_data[component_id]['cur_status'] = 'creating'
+                #     json_data[component_id]['status_cn'] = '创建中'
+                # else:
+                json_data[component_id]['cur_status'] = 'Unknown'
+                json_data[component_id]['status_cn'] = '未知'
+            # if json_data[component_id]["service_source"] == "third_party":
+            #     json_data[component_id]['cur_status'] = "third_party"
+        #
+        #     # # 查询是否打开对外组件端口
+        #     # port_list = TenantServicesPort.objects.filter(service_id=service_info.service_id)
+        #     # # 判断组件是否有对外端口
+        #     # outer_port_exist = False
+        #     # if len(port_list) > 0:
+        #     #     outer_port_exist = reduce(lambda x, y: x or y, [t.is_outer_service for t in list(port_list)])
+        #     json_data[service_info.service_id]['is_internet'] = False
+        #     if service_info.service_id in outerServices:
+        #         json_data[service_info.service_id]['is_internet'] = True
+        #     # json_data[service_info.service_id]['is_internet'] = TenantServicesPort.objects.filter(service_id=service_info.service_id, is_outer_service=True).exists()
 
-            if json_data[service_info.service_id]["service_source"] == "third_party":
-                json_data[service_info.service_id]['cur_status'] = "third_party"
-
-            # 查询是否打开对外组件端口
-            port_list = TenantServicesPort.objects.filter(service_id=service_info.service_id)
-            # 判断组件是否有对外端口
-            outer_port_exist = False
-            if len(port_list) > 0:
-                outer_port_exist = reduce(lambda x, y: x or y, [t.is_outer_service for t in list(port_list)])
-            json_data[service_info.service_id]['is_internet'] = outer_port_exist
-
-        for service_relation in service_relation_list:
-            tmp_id = service_relation.service_id
-            tmp_info = service_map.get(tmp_id)
-            if tmp_info:
-                tmp_dep_id = service_relation.dep_service_id
-                tmp_dep_info = service_map.get(tmp_dep_id)
-                # 依赖组件的cname
-                if tmp_dep_info:
-                    tmp_info_relation = []
-                    if tmp_info.service_id in list(json_svg.keys()):
-                        tmp_info_relation = json_svg.get(tmp_info.service_id)
-                    tmp_info_relation.append(tmp_dep_info.service_id)
-                    json_svg[tmp_info.service_id] = tmp_info_relation
+        # for service_relation in service_relation_list:
+        #     tmp_id = service_relation.service_id
+        #     tmp_info = service_map.get(tmp_id)
+        #     if tmp_info:
+        #         tmp_dep_id = service_relation.dep_service_id
+        #         tmp_dep_info = service_map.get(tmp_dep_id)
+        #         # 依赖组件的cname
+        #         if tmp_dep_info:
+        #             tmp_info_relation = []
+        #             if tmp_info.service_id in set(json_svg.keys()):
+        #                 tmp_info_relation = json_svg.get(tmp_info.service_id)
+        #             tmp_info_relation.append(tmp_dep_info.service_id)
+        #             json_svg[tmp_info.service_id] = tmp_info_relation
 
         topological_info["json_data"] = json_data
-        topological_info["json_svg"] = json_svg
+        # topological_info["json_svg"] = json_svg
         return topological_info
 
     def get_group_topological_graph_details(self, team, team_id, team_name, service, region_name):

@@ -50,14 +50,24 @@ class TopologicalGraphView(RegionTenantHeaderView):
                 result = general_message(code, "group_id is missing or not digit!", "group_id缺失或非数字")
                 return Response(result, status=code)
             team_id = self.team.tenant_id
-            group_count = group_repo.get_group_count_by_team_id_and_group_id(team_id=team_id, group_id=group_id)
-            if group_count == 0:
+            group_exists = group_repo.get_group_exists_by_team_id_and_group_id(team_id=team_id, group_id=group_id)
+            if not group_exists:
                 code = 202
                 result = general_message(code, "group is not yours!", "当前组已删除或您无权限查看!", bean={})
                 return Response(result, status=200)
             topological_info = topological_service.get_group_topological_graph(
                 group_id=group_id, region=self.response_region, team_name=self.team_name, enterprise_id=self.team.enterprise_id)
             result = general_message(code, "Obtain topology success.", "获取拓扑图成功", bean=topological_info)
+        return Response(result, status=code)
+
+
+class TopologicalGraphStatusView(RegionTenantHeaderView):
+    def post(self, request, *args, **kwargs):
+        component_ids = request.data.get("component_ids", [])
+        code = 200
+        topological_info = topological_service.get_group_topological_graph_status(
+            component_ids=component_ids, region=self.response_region, team_name=self.team_name, enterprise_id=self.team.enterprise_id)
+        result = general_message(code, "Obtain topology success.", "获取拓扑图成功", bean=topological_info)
         return Response(result, status=code)
 
 
