@@ -1,4 +1,4 @@
-ARG IMAGE_NAMESPACE=rainbond
+ARG IMAGE_NAMESPACE=yangk
 ARG VERSION=V5.4-dev
 
 # build ui
@@ -26,7 +26,7 @@ RUN python -m venv --copies /app/ui/py_venv && \
     pip install -r requirements.txt $PYTHONPROXY && \
     python manage.py collectstatic --noinput --ignore weavescope-src --ignore drf-yasg --ignore rest_framework
 
-RUN git clone --depth=1 -b V6.0 https://github.com/goodrain/rainbond-chart /app/ui/rainbond-chart
+RUN git clone --depth=1 -b V6.0 https://github.com/yangkaa/rainbond-chart /app/ui/rainbond-chart
 
 # build console image
 FROM python:3.6-slim-stretch
