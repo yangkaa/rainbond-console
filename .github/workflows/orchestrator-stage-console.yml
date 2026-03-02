@@ -46,9 +46,10 @@ jobs:
           ref: workflow
 
       - name: Execute Console stage checks
+        id: verify_console
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           FEATURE_ID="${{ inputs.feature_id }}"
           ENGINE="${{ inputs.engine }}"
           STRICT="${{ inputs.strict_verify }}"
@@ -64,8 +65,11 @@ jobs:
             echo "repo=rainbond-console"
             echo "stage=console"
             echo "timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            echo "pwd=$(pwd)"
+            ls -la
           } > "${RAW_LOG}"
 
+          rc=0
           if [[ "${STRICT}" == "true" ]]; then
             {
               echo "running: python3 --version"
@@ -73,14 +77,19 @@ jobs:
               echo "running: python3 -m py_compile manage.py"
               python3 -m py_compile manage.py
               echo "strict_verify note: replace with full yapf/flake8/pytest command set"
-            } >> "${RAW_LOG}" 2>&1
+            } >> "${RAW_LOG}" 2>&1 || rc=$?
           else
             {
               echo "running: python3 --version"
               python3 --version
               echo "running: python3 -m py_compile manage.py"
               python3 -m py_compile manage.py
-            } >> "${RAW_LOG}" 2>&1
+            } >> "${RAW_LOG}" 2>&1 || rc=$?
+          fi
+
+          status="passed"
+          if [[ "${rc}" -ne 0 ]]; then
+            status="failed"
           fi
 
           cat > "${SUMMARY_JSON}" <<JSON
@@ -90,20 +99,35 @@ jobs:
             "stage": "console",
             "engine": "${ENGINE}",
             "strict_verify": ${STRICT},
-            "status": "passed"
+            "status": "${status}"
           }
           JSON
 
+          echo "rc=${rc}" >> "$GITHUB_OUTPUT"
           cat "${SUMMARY_JSON}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload raw console verification log
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: orchestrator-raw-console-${{ inputs.feature_id }}
           path: /tmp/orchestrator/raw-console-${{ inputs.feature_id }}.log
 
       - name: Upload console summary
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: orchestrator-summary-console-${{ inputs.feature_id }}
           path: /tmp/orchestrator/verify-summary-console-${{ inputs.feature_id }}.json
+
+      - name: Print raw console log to summary
+        if: always()
+        shell: bash
+        run: |
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          cat "/tmp/orchestrator/raw-console-${{ inputs.feature_id }}.log" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail when console checks failed
+        if: steps.verify_console.outputs.rc != '0'
+        run: exit 1
