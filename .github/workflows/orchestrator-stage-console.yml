@@ -41,6 +41,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          repository: yangkaa/rainbond-console
+          ref: workflow
 
       - name: Execute Console stage checks
         shell: bash
