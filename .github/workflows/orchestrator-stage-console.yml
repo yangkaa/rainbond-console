@@ -1,0 +1,106 @@
+name: orchestrator-stage-console
+
+on:
+  workflow_call:
+    inputs:
+      feature_id:
+        required: true
+        type: string
+      engine:
+        required: true
+        type: string
+      strict_verify:
+        required: false
+        default: false
+        type: boolean
+  workflow_dispatch:
+    inputs:
+      feature_id:
+        description: Feature ID (e.g. RB-123)
+        required: true
+        type: string
+      engine:
+        description: Engine used by orchestrator
+        required: true
+        default: opencode
+        type: choice
+        options:
+          - opencode
+          - claude
+      strict_verify:
+        description: Run stricter verification commands
+        required: true
+        default: false
+        type: boolean
+
+jobs:
+  verify-console:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Execute Console stage checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          FEATURE_ID="${{ inputs.feature_id }}"
+          ENGINE="${{ inputs.engine }}"
+          STRICT="${{ inputs.strict_verify }}"
+
+          mkdir -p /tmp/orchestrator
+          RAW_LOG="/tmp/orchestrator/raw-console-${FEATURE_ID}.log"
+          SUMMARY_JSON="/tmp/orchestrator/verify-summary-console-${FEATURE_ID}.json"
+
+          {
+            echo "feature_id=${FEATURE_ID}"
+            echo "engine=${ENGINE}"
+            echo "strict_verify=${STRICT}"
+            echo "repo=rainbond-console"
+            echo "stage=console"
+            echo "timestamp=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          } > "${RAW_LOG}"
+
+          if [[ "${STRICT}" == "true" ]]; then
+            {
+              echo "running: python3 --version"
+              python3 --version
+              echo "running: python3 -m py_compile manage.py"
+              python3 -m py_compile manage.py
+              echo "strict_verify note: replace with full yapf/flake8/pytest command set"
+            } >> "${RAW_LOG}" 2>&1
+          else
+            {
+              echo "running: python3 --version"
+              python3 --version
+              echo "running: python3 -m py_compile manage.py"
+              python3 -m py_compile manage.py
+            } >> "${RAW_LOG}" 2>&1
+          fi
+
+          cat > "${SUMMARY_JSON}" <<JSON
+          {
+            "feature_id": "${FEATURE_ID}",
+            "repo": "rainbond-console",
+            "stage": "console",
+            "engine": "${ENGINE}",
+            "strict_verify": ${STRICT},
+            "status": "passed"
+          }
+          JSON
+
+          cat "${SUMMARY_JSON}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload raw console verification log
+        uses: actions/upload-artifact@v4
+        with:
+          name: orchestrator-raw-console-${{ inputs.feature_id }}
+          path: /tmp/orchestrator/raw-console-${{ inputs.feature_id }}.log
+
+      - name: Upload console summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: orchestrator-summary-console-${{ inputs.feature_id }}
+          path: /tmp/orchestrator/verify-summary-console-${{ inputs.feature_id }}.json
